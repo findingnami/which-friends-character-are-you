@@ -16,7 +16,7 @@ app.post('/subscribe', async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.YjB7GOCBkMfshxeOHm4AkRcqcVuQl92SApiPkfGt1p7V0uXB9psYZOs64gHT11da}`
+        'Authorization': `Bearer ${process.env.4PCPPdwu8pIsmUSpBL7IDBWucTR7PZGsT7i10c0W33nwFvS0lE6gk4Q7TMfjMBl5}`
       },
       body: JSON.stringify({
         email,
