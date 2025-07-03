@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Baloo 2', 'Segoe UI', sans-serif;
+  background: #f6f8fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin: 30px 0 10px;
+  text-align: center;
+  letter-spacing: 0.4rem;
+  font-weight: 600;
+  color: #111;
+}
+
+h1::after {
+  content: '• • • • • • •';
+  display: block;
+  color: #f4a261;
+  font-size: 1.2rem;
+  margin-top: 6px;
+  letter-spacing: 1rem;
+  text-align: center;
+}
+
+h3 {
+  color: #777;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.question {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.5s ease;
+}
+
+.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+label {
+  background: #f1f1f1;
+  padding: 15px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block;
+  font-size: 1.05rem;
+}
+
+label:hover {
+  background: #e0e0e0;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label input[type="radio"]:checked {
+  /* fallback if using inside label */
+  accent-color: #a29bfe;
+}
+
+/* OR highlight entire label if radio inside label */
+label:has(input[type="radio"]:checked) {
+  background: #a29bfe;
+  color: white;
+  font-weight: bold;
+}
+
+
+/* Button */
+button {
+  align-self: flex-end;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #2e7d32; /* Central Perk green */
+  color: white;
+  font-family: 'Baloo 2', sans-serif;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #27642a;
+}
+
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.result {
+  margin-top: 40px;
+  font-size: 1.3rem;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+/* Hover: lavender */
+label:hover {
+  background: #a29bfe;
+  box-shadow: 0 0 0 3px rgba(162, 155, 254, 0.3);
+  color: #222;
+  transition: all 0.2s ease;
+}
+
+/* Selected: Central Perk orange */
+input[type="radio"]:checked + label,
+label:has(input[type="radio"]:checked) {
+  background: #e67e22;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #d35400;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.3);
+}
+
+
+label {
+  transition: all 0.25s ease;
+}
+
+/* Submit Button - Monica's Kitchen Blue */
+form button[type="submit"] {
+  background:#a29bfe;
+}
+
+form button[type="submit"]:hover {
+  background: #d35400;
+}
+
+/* Question slide-up */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.question {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideUp 0.6s ease;
+}
+
+.active {
+  display: flex;
+}
+
+/* Back Button Style */
+.backBtn {
+  align-self: flex-start;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #e0e0e0; /* Light gray */
+  color: #333;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.backBtn:hover {
+  background: #d5d5d5;
+}
+
+/* Selected (clicked) orange style */
+input[type="radio"]:checked + label,
+label:has(input[type="radio"]:checked) {
+  background: #e67e22;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #d35400;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.3);
+  transition: all 0.2s ease;
+}
+
+/* Flash animation on click */
+.selected-flash {
+  animation: flashOrange 0.3s ease forwards;
+}
+
+@keyframes flashOrange {
+  0% { background-color: #e67e22; }
+  50% { background-color: #f39c12; }
+  100% { background-color: #e67e22; }
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Back button style (light gray) */
+.backBtn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.backBtn:hover {
+  background: #cfcfcf;
+}
+
+select {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 10px 0 20px;
+  font-size: 1rem;
+  font-family: 'Baloo 2', sans-serif;
+  background: #f1f1f1;
+  color: #333;
+  border: 2px solid #a29bfe;
+  border-radius: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23999'%20d='M2%200L0%202h4L2%200z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px top 50%;
+  background-size: 12px;
+  transition: border 0.3s ease;
+}
+
+select:focus {
+  border-color: #e67e22;
+  outline: none;
+  background-color: #fffaf5;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 10px 0 20px;
+  font-size: 1rem;
+  font-family: 'Baloo 2', sans-serif;
+  background: #f1f1f1;
+  border: 2px solid #a29bfe; /* Friends purple */
+  border-radius: 12px;
+  color: #333;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border-color: #e67e22; /* Central Perk orange */
+  background-color: #fffaf5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+}
+
+.result {
+  display: none;
+  margin-top: 40px;
+  font-size: 1.3rem;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.result.active {
+  display: block;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

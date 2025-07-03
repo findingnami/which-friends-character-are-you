@@ -1,0 +1,127 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Which Friends Character Are You?</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Which Friends Character Are You?</h1>
+  <h3>Find out which iconic personality matches your vibe.</h3>
+
+  <form id="quizForm">
+    <!-- Questions 1 to 5 -->
+    <!-- Repeat structure for each question -->
+    <div class="question active" id="q1">
+  <h2>What’s your ideal weekend activity?</h2>
+  <label><input type="radio" name="q1" value="Rachel"> Shopping and brunch with friends</label>
+  <label><input type="radio" name="q1" value="Monica"> Cleaning and organizing your space</label>
+  <label><input type="radio" name="q1" value="Phoebe"> Playing music, relaxing, or journaling</label>
+  <label><input type="radio" name="q1" value="Ross"> Reading or going to a museum</label>
+  <label><input type="radio" name="q1" value="Chandler"> Watching stand-up or cracking jokes with friends</label>
+  <label><input type="radio" name="q1" value="Joey"> Pizza, sports, and chill with your besties</label>
+  <button type="button" onclick="next(1)">Next</button>
+  <!-- No back button here -->
+</div>
+
+
+    <div class="question" id="q2">
+      <h2>How do you handle stress?</h2>
+      <label><input type="radio" name="q2" value="Rachel"> Retail therapy, obviously</label>
+      <label><input type="radio" name="q2" value="Monica"> Deep clean everything until it sparkles</label>
+      <label><input type="radio" name="q2" value="Phoebe"> Sage the room and vibe it out</label>
+      <label><input type="radio" name="q2" value="Ross"> Analyze it to death</label>
+      <label><input type="radio" name="q2" value="Chandler"> Laugh it off with sarcasm</label>
+      <label><input type="radio" name="q2" value="Joey"> Ignore it and eat snacks</label>
+
+      <div class="btn-row">
+      <button type="button" class="backBtn" onclick="goBack(2)">← Back</button>
+      <button type="button" onclick="next(2)">Next</button>
+      </div>
+
+    </div>
+
+    <div class="question" id="q3">
+      <h2>What’s your biggest strength?</h2>
+      <label><input type="radio" name="q3" value="Rachel"> Fashion sense & charm</label>
+      <label><input type="radio" name="q3" value="Monica"> Drive, loyalty, and organization</label>
+      <label><input type="radio" name="q3" value="Phoebe"> Creativity & honesty</label>
+      <label><input type="radio" name="q3" value="Ross"> Intelligence & curiosity</label>
+      <label><input type="radio" name="q3" value="Chandler"> Humor & wit</label>
+      <label><input type="radio" name="q3" value="Joey"> Confidence & fun energy</label>
+
+      <div class="btn-row">
+      <button type="button" class="backBtn" onclick="goBack(3)">← Back</button>
+      <button type="button" onclick="next(3)">Next</button>
+      </div>
+
+    </div>
+
+    <div class="question" id="q4">
+      <h2>What’s your relationship style?</h2>
+      <label><input type="radio" name="q4" value="Rachel"> A hopeless romantic</label>
+      <label><input type="radio" name="q4" value="Monica"> Intense and loyal</label>
+      <label><input type="radio" name="q4" value="Phoebe"> Free-spirited and honest</label>
+      <label><input type="radio" name="q4" value="Ross"> Complicated but committed</label>
+      <label><input type="radio" name="q4" value="Chandler"> Scared of commitment but wants love</label>
+      <label><input type="radio" name="q4" value="Joey"> Flirty and fun</label>
+
+      <div class="btn-row">
+      <button type="button" class="backBtn" onclick="goBack(4)">← Back</button>
+      <button type="button" onclick="next(4)">Next</button>
+      </div>
+
+    </div>
+
+    <div class="question" id="q5">
+      <h2>Pick a quote:</h2>
+      <label><input type="radio" name="q5" value="Rachel"> “No uterus, no opinion.”</label>
+      <label><input type="radio" name="q5" value="Monica"> “I KNOW!”</label>
+      <label><input type="radio" name="q5" value="Phoebe"> “Smelly Cat...”</label>
+      <label><input type="radio" name="q5" value="Ross"> “We were on a break!”</label>
+      <label><input type="radio" name="q5" value="Chandler"> “Could I be wearing any more clothes?”</label>
+      <label><input type="radio" name="q5" value="Joey"> “How you doin’?”</label>
+
+      <div class="btn-row">
+      <button type="button" class="backBtn" onclick="goBack(5)">← Back</button>
+      <button type="button" onclick="next(5)">Next</button>
+      </div>
+
+    </div>
+
+    <div class="question" id="q6">
+      <h2>Which coffee order are you?</h2>
+      <select name="coffee">
+        <option>Iced caramel macchiato</option>
+        <option>Hot black coffee</option>
+        <option>Herbal tea</option>
+        <option>Decaf latte</option>
+        <option>Vanilla cappuccino</option>
+        <option>Espresso shot</option>
+      </select>
+
+      <h3>Tell us your name and email to reveal your result and receive updates from The One With the Newsletter:</h3>
+      <input type="text" name="name" placeholder="Your first name" required>
+      <input type="email" name="email" placeholder="Your email address" required>
+      
+      <div class="btn-row">
+      <button type="button" class="backBtn" onclick="goBack(6)">← Back</button>
+      <button type="submit"><strong>Reveal My Character</strong></button>
+      </div>
+
+    </div>
+  </form>
+
+  
+  <div class="result" id="result"></div>
+  <script src="script.js"></script>
+
+<footer>
+  created by <strong><a href="https://instagram.com/rachelsfriendsmedia" target="_blank">@rachelsfriendsmedia</a></strong>
+</footer>
+
+</body>
+</html>
