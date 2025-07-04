@@ -80,7 +80,7 @@ document.getElementById("quizForm").addEventListener("submit", async function (e
       body: JSON.stringify({
         email,
         first_name: name,
-        coffee_preference: coffee
+        send_welcome_email: true
       })
     });
   } catch (error) {
