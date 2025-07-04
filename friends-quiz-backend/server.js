@@ -33,8 +33,9 @@ app.post('/subscribe', async (req, res) => {
       res.status(response.status).json(data);
     } else {
       const text = await response.text();
-      console.error('❌ Beehiiv returned non-JSON response:', text);
+      console.error(`❌ Beehiiv error (status ${response.status}):`, text);
       res.status(response.status).send(text);
+
     }
   } catch (error) {
     console.error('❌ Subscription failed:', error);
