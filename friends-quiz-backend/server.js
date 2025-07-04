@@ -12,7 +12,7 @@ app.post('/subscribe', async (req, res) => {
   const { email, first_name } = req.body;
 
   try {
-    const response = await fetch('https://api.beehiiv.com/v2/publications/pub_c75cecd2-f016-4614-a299-14b3570f462d/subscribers', {
+    const response = await fetch('https://api.beehiiv.com/v2/subscribers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,6 +22,7 @@ app.post('/subscribe', async (req, res) => {
       body: JSON.stringify({
         email,
         first_name,
+        publication_id: process.env.BEEHIIV_PUBLICATION_ID,
         send_welcome_email: true
       })
     });
