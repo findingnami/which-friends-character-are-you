@@ -74,7 +74,7 @@ document.getElementById("quizForm").addEventListener("submit", async function (e
 
   // Send to your backend
   try {
-    await fetch('http://localhost:3000/subscribe', {
+    await fetch('https://friends-quiz-backend.onrender.com/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
