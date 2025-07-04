@@ -12,7 +12,7 @@ app.post('/subscribe', async (req, res) => {
   const { email, first_name } = req.body;
 
   try {
-    const response = await fetch('https://api.beehiiv.com/v2/subscribers', {
+    const response = await fetch('https://api.beehiiv.com/v2/publications/pub_c75cecd2-f016-4614-a299-14b3570f462d/subscribers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
