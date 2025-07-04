@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/subscribe', async (req, res) => {
-  const { email, first_name, coffee_preference } = req.body;
+  const { email, first_name } = req.body;
 
   try {
     const response = await fetch('https://api.beehiiv.com/v2/subscribers', {
@@ -21,12 +21,20 @@ app.post('/subscribe', async (req, res) => {
       body: JSON.stringify({
         email,
         first_name,
-        custom_fields: { coffee_preference },
         send_welcome_email: true
       })
     });
 
-    const data = await response.json();
+    const text = await response.text();
+    let data;
+
+    try {
+      data = JSON.parse(text);
+    } catch (err) {
+      console.error('❌ Beehiiv returned non-JSON response:', text);
+      return res.status(500).json({ error: 'Beehiiv did not return valid JSON', raw: text });
+    }
+
     res.status(response.status).json(data);
   } catch (error) {
     console.error('❌ Subscription failed:', error);
@@ -34,7 +42,7 @@ app.post('/subscribe', async (req, res) => {
   }
 });
 
-// ✅ Use Render's dynamic port & bind to 0.0.0.0
+// ✅ Use Render’s dynamic port and bind to 0.0.0.0 for compatibility
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server is running at http://0.0.0.0:${PORT}`);
