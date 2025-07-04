@@ -16,6 +16,7 @@ app.post('/subscribe', async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`
       },
       body: JSON.stringify({
@@ -25,24 +26,22 @@ app.post('/subscribe', async (req, res) => {
       })
     });
 
-    const text = await response.text();
-    let data;
+    const contentType = response.headers.get('content-type');
 
-    try {
-      data = JSON.parse(text);
-    } catch (err) {
+    if (contentType && contentType.includes('application/json')) {
+      const data = await response.json();
+      res.status(response.status).json(data);
+    } else {
+      const text = await response.text();
       console.error('❌ Beehiiv returned non-JSON response:', text);
-      return res.status(500).json({ error: 'Beehiiv did not return valid JSON', raw: text });
+      res.status(response.status).send(text);
     }
-
-    res.status(response.status).json(data);
   } catch (error) {
     console.error('❌ Subscription failed:', error);
     res.status(500).json({ error: 'Something went wrong' });
   }
 });
 
-// ✅ Use Render’s dynamic port and bind to 0.0.0.0 for compatibility
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server is running at http://0.0.0.0:${PORT}`);
