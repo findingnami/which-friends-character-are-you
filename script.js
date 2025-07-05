@@ -7,6 +7,8 @@ const scores = {
   Joey: 0
 };
 
+console.log("📌 Script loaded");
+
 // Show the current question
 function showQuestion(num) {
   const allQuestions = document.querySelectorAll('.question');
@@ -26,7 +28,6 @@ function next(num) {
   const label = selected.closest("label");
   label.classList.add("selected-flash");
 
-  // Only increment score once
   const val = selected.value;
   if (!selected.dataset.counted) {
     scores[val]++;
@@ -55,7 +56,6 @@ function goBack(num) {
       const label = selected.closest("label");
       label.classList.add("selected-flash");
 
-      // Prevent double-counting if user changes answer
       if (!selected.dataset.counted) {
         scores[val]++;
         selected.dataset.counted = "true";
@@ -72,9 +72,11 @@ function goBack(num) {
 // Submit handler
 document.getElementById("quizForm").addEventListener("submit", function (e) {
   e.preventDefault();
+  console.log("🚨 Submit handler triggered");
 
   const name = this.name.value.trim();
   const email = this.email.value.trim();
+  console.log("📧 Name:", name, "Email:", email);
 
   if (!name || !email) {
     alert("Please enter your name and email.");
@@ -83,8 +85,10 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 
   // Get highest-scoring character
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  console.log("🏆 Highest scoring character:", highest);
 
   // Send to Google Apps Script (middleware to Beehiiv)
+  console.log("📤 Sending data to Google Apps Script...");
   fetch('https://script.google.com/macros/s/AKfycbyDFjpkDxEiGydHLuTqGVJ9NwJ6B3i4wc0eLqV5cvrR1y1UPKWKGUH_4O75f2aiAJPS/exec', {
     method: 'POST',
     headers: {
@@ -96,9 +100,12 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
       result: highest
     })
   })
-  .then(res => res.json())
+  .then(res => {
+    console.log("✅ Response received");
+    return res.json();
+  })
   .then(data => {
-    console.log("✅ Sent to Google Apps Script:", data);
+    console.log("✅ Parsed response:", data);
   })
   .catch(err => {
     console.error("❌ Error sending to Apps Script:", err);
