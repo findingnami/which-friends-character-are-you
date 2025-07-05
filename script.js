@@ -65,7 +65,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 
   // Send data to Google Apps Script proxy
-  fetch('YOUR_GOOGLE_APPS_SCRIPT_URL_HERE', {
+  fetch('https://script.google.com/macros/s/AKfycbyDFjpkDxEiGydHLuTqGVJ9NwJ6B3i4wc0eLqV5cvrR1y1UPKWKGUH_4O75f2aiAJPS/exec', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
