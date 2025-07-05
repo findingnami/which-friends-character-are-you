@@ -89,7 +89,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 
   // Send to Google Apps Script (middleware to Beehiiv)
   console.log("📤 Sending data to Google Apps Script...");
-  fetch('https://script.google.com/macros/s/AKfycbyDFjpkDxEiGydHLuTqGVJ9NwJ6B3i4wc0eLqV5cvrR1y1UPKWKGUH_4O75f2aiAJPS/exec', {
+  fetch('https://friends-quiz-proxy.rachelsfriendsmedia.workers.dev/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
