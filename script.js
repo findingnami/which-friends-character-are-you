@@ -61,17 +61,16 @@ function goBack(num) {
 });
 
 document.getElementById("quizForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Stop default form action
-
   const name = this.name.value.trim();
   const email = this.email.value.trim();
 
   if (!name || !email) {
+    e.preventDefault(); // Only prevent if validation fails
     alert("Please enter your name and email.");
     return;
   }
 
-  // Find the top character
+  // Set result field before submission
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
   document.getElementById("resultField").value = highest;
 
@@ -84,12 +83,12 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     Joey: `🍕 You’re JOEY TRIBBIANI!<br>Friendly, flirty, and always down for a snack.<br>You have natural charm, big golden-retriever energy,<br>and know how to light up a room. How you doin’?`
   };
 
-  // Hide form, show result
-  document.getElementById("quizForm").style.display = "none";
-  const resultEl = document.getElementById("character");
-  resultEl.innerHTML = character[highest];
-  resultEl.classList.add("active");
-
-  // Submit to Google Sheet
-  this.submit();
+  // Let the form submit (no preventDefault unless there's an error)
+  // Show result shortly after
+  setTimeout(() => {
+    document.getElementById("quizForm").style.display = "none";
+    const resultEl = document.getElementById("character");
+    resultEl.innerHTML = character[highest];
+    resultEl.classList.add("active");
+  }, 300);
 });
