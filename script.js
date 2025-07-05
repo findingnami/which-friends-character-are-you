@@ -55,7 +55,7 @@ function goBack(num) {
   });
 });
 
-// Submit quiz and send to Google Sheets
+// Submit quiz and send to Google Apps Script
 document.getElementById("quizForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -64,30 +64,29 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 
-  // Send to Formspree
-  fetch("https://formspree.io/f/xovwzvbk", {  // replace with your own endpoint
-    method: "POST",
+  // Send data to Google Apps Script proxy
+  fetch('YOUR_GOOGLE_APPS_SCRIPT_URL_HERE', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       name: name,
       email: email,
-      character: highest
+      result: highest
     })
   })
-    .then(response => {
-      if (response.ok) {
-        alert("🎉 Submission successful!");
-      } else {
-        alert("❌ Submission failed. Please try again.");
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      alert("❌ An error occurred.");
-    });
-
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      console.log("✅ Successfully sent to Beehiiv via Apps Script");
+    } else {
+      console.error("❌ Beehiiv API error:", data.error);
+    }
+  })
+  .catch(err => {
+    console.error("❌ Fetch failed:", err);
+  });
 
   const character = {
     Rachel: `🛍️ You’re RACHEL GREEN!<br>Stylish, ambitious, and full of heart.<br>You care deeply about your people (even if you're a little dramatic sometimes).<br>You grow through every season — and look great while doing it.`,
