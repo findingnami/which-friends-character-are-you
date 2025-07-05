@@ -60,9 +60,7 @@ function goBack(num) {
   });
 });
 
-document.getElementById("quizForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
+document.getElementById("quizForm").addEventListener("submit", function () {
   const name = this.name.value.trim();
   const email = this.email.value.trim();
 
@@ -71,21 +69,11 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     return;
   }
 
+  // Set the result into the hidden field before submit
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  document.getElementById("resultField").value = highest;
 
-  // Send to Google Apps Script
-  fetch(this.action, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      name,
-      email,
-      result: highest
-    })
-  });
-
-  const character = {
+const character = {
     Rachel: `🛍️ You’re RACHEL GREEN!<br>Stylish, ambitious, and full of heart.<br>You care deeply about your people (even if you're a little dramatic sometimes).<br>You grow through every season — and look great while doing it.`,
     Monica: `🧽 You’re MONICA GELLER!<br>Organized, competitive and fiercely loyal.<br>You're the mom of the group, the planner of all things,<br>and you give 100% — especially when cleaning.`,
     Phoebe: `🎸 You’re PHOEBE BUFFAY!<br>You’re the definition of quirky and cool.<br>A true free spirit, you tell it like it is, trust your gut,<br>and radiate weird-but-wonderful energy wherever you go.`,
