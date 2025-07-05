@@ -73,7 +73,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     body: JSON.stringify({
       first_name: name,
       email: email,
-      result: highest
+      character: highest
     })
   })
     .then(response => response.text())
@@ -85,7 +85,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
       alert('❌ Submission failed');
     });
 
-  const result = {
+  const character = {
     Rachel: `🛍️ You’re RACHEL GREEN!<br>Stylish, ambitious, and full of heart.<br>You care deeply about your people (even if you're a little dramatic sometimes).<br>You grow through every season — and look great while doing it.`,
     Monica: `🧽 You’re MONICA GELLER!<br>Organized, competitive and fiercely loyal.<br>You're the mom of the group, the planner of all things,<br>and you give 100% — especially when cleaning.`,
     Phoebe: `🎸 You’re PHOEBE BUFFAY!<br>You’re the definition of quirky and cool.<br>A true free spirit, you tell it like it is, trust your gut,<br>and radiate weird-but-wonderful energy wherever you go.`,
@@ -95,6 +95,6 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   };
 
   document.getElementById("quizForm").style.display = "none";
-  document.getElementById("result").innerHTML = result[highest];
-  document.getElementById("result").classList.add("active");
+  document.getElementById("character").innerHTML = character[highest];
+  document.getElementById("character").classList.add("active");
 });
