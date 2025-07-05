@@ -127,7 +127,7 @@ select {
   font-size: 1rem;
 }
 
-.result {
+.character {
   margin-top: 40px;
   font-size: 1.3rem;
   padding: 20px;
@@ -305,7 +305,7 @@ input[type="email"]:focus {
   box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
 }
 
-.result {
+.character {
   display: none;
   margin-top: 40px;
   font-size: 1.3rem;
@@ -316,7 +316,7 @@ input[type="email"]:focus {
   text-align: center;
 }
 
-.result.active {
+.character.active {
   display: block;
 }
 
