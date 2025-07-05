@@ -38,7 +38,7 @@ function goBack(num) {
   showQuestion(num - 1);
 }
 
-// Auto-next on radio change
+// Auto-next on radio change for questions 1–5
 [1, 2, 3, 4, 5].forEach(num => {
   document.querySelectorAll(`input[name="q${num}"]`).forEach(radio => {
     radio.addEventListener("change", (e) => {
@@ -60,7 +60,9 @@ function goBack(num) {
   });
 });
 
-document.getElementById("quizForm").addEventListener("submit", function () {
+document.getElementById("quizForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // Stop default form action
+
   const name = this.name.value.trim();
   const email = this.email.value.trim();
 
@@ -69,11 +71,11 @@ document.getElementById("quizForm").addEventListener("submit", function () {
     return;
   }
 
-  // Set the result into the hidden field before submit
+  // Find the top character
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
   document.getElementById("resultField").value = highest;
 
-const character = {
+  const character = {
     Rachel: `🛍️ You’re RACHEL GREEN!<br>Stylish, ambitious, and full of heart.<br>You care deeply about your people (even if you're a little dramatic sometimes).<br>You grow through every season — and look great while doing it.`,
     Monica: `🧽 You’re MONICA GELLER!<br>Organized, competitive and fiercely loyal.<br>You're the mom of the group, the planner of all things,<br>and you give 100% — especially when cleaning.`,
     Phoebe: `🎸 You’re PHOEBE BUFFAY!<br>You’re the definition of quirky and cool.<br>A true free spirit, you tell it like it is, trust your gut,<br>and radiate weird-but-wonderful energy wherever you go.`,
@@ -82,8 +84,12 @@ const character = {
     Joey: `🍕 You’re JOEY TRIBBIANI!<br>Friendly, flirty, and always down for a snack.<br>You have natural charm, big golden-retriever energy,<br>and know how to light up a room. How you doin’?`
   };
 
+  // Hide form, show result
   document.getElementById("quizForm").style.display = "none";
   const resultEl = document.getElementById("character");
   resultEl.innerHTML = character[highest];
   resultEl.classList.add("active");
+
+  // Submit to Google Sheet
+  this.submit();
 });
