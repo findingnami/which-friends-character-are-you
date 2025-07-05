@@ -7,7 +7,7 @@ const scores = {
   Joey: 0
 };
 
-// Show question
+// Show the current question
 function showQuestion(num) {
   const allQuestions = document.querySelectorAll('.question');
   allQuestions.forEach(q => q.classList.remove('active'));
@@ -15,7 +15,7 @@ function showQuestion(num) {
   if (target) target.classList.add('active');
 }
 
-// Next button logic
+// Handle "Next" button
 function next(num) {
   const selected = document.querySelector(`input[name="q${num}"]:checked`);
   if (!selected) {
@@ -23,9 +23,15 @@ function next(num) {
     return;
   }
 
-  scores[selected.value]++;
   const label = selected.closest("label");
   label.classList.add("selected-flash");
+
+  // Only increment score once
+  const val = selected.value;
+  if (!selected.dataset.counted) {
+    scores[val]++;
+    selected.dataset.counted = "true";
+  }
 
   setTimeout(() => {
     label.classList.remove("selected-flash");
@@ -33,20 +39,28 @@ function next(num) {
   }, 300);
 }
 
-// Back button logic
+// Handle "Back" button
 function goBack(num) {
   showQuestion(num - 1);
 }
 
-// Auto-slide on answer
+// Auto-slide after answer
 [1, 2, 3, 4, 5].forEach(num => {
   const radios = document.querySelectorAll(`input[name="q${num}"]`);
   radios.forEach(radio => {
     radio.addEventListener('change', (e) => {
       const selected = e.target;
+      const val = selected.value;
+
       const label = selected.closest("label");
       label.classList.add("selected-flash");
-      scores[selected.value]++;
+
+      // Prevent double-counting if user changes answer
+      if (!selected.dataset.counted) {
+        scores[val]++;
+        selected.dataset.counted = "true";
+      }
+
       setTimeout(() => {
         label.classList.remove("selected-flash");
         showQuestion(num + 1);
@@ -55,16 +69,22 @@ function goBack(num) {
   });
 });
 
-// Submit quiz and send to Google Apps Script
+// Submit handler
 document.getElementById("quizForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const name = this.name.value;
-  const email = this.email.value;
+  const name = this.name.value.trim();
+  const email = this.email.value.trim();
 
+  if (!name || !email) {
+    alert("Please enter your name and email.");
+    return;
+  }
+
+  // Get highest-scoring character
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 
-  // Send data to Google Apps Script proxy
+  // Send to Google Apps Script (middleware to Beehiiv)
   fetch('https://script.google.com/macros/s/AKfycbyDFjpkDxEiGydHLuTqGVJ9NwJ6B3i4wc0eLqV5cvrR1y1UPKWKGUH_4O75f2aiAJPS/exec', {
     method: 'POST',
     headers: {
@@ -78,16 +98,13 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   })
   .then(res => res.json())
   .then(data => {
-    if (data.success) {
-      console.log("✅ Successfully sent to Beehiiv via Apps Script");
-    } else {
-      console.error("❌ Beehiiv API error:", data.error);
-    }
+    console.log("✅ Sent to Google Apps Script:", data);
   })
   .catch(err => {
-    console.error("❌ Fetch failed:", err);
+    console.error("❌ Error sending to Apps Script:", err);
   });
 
+  // Show result
   const character = {
     Rachel: `🛍️ You’re RACHEL GREEN!<br>Stylish, ambitious, and full of heart.<br>You care deeply about your people (even if you're a little dramatic sometimes).<br>You grow through every season — and look great while doing it.`,
     Monica: `🧽 You’re MONICA GELLER!<br>Organized, competitive and fiercely loyal.<br>You're the mom of the group, the planner of all things,<br>and you give 100% — especially when cleaning.`,
@@ -98,6 +115,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   };
 
   document.getElementById("quizForm").style.display = "none";
-  document.getElementById("character").innerHTML = character[highest];
-  document.getElementById("character").classList.add("active");
+  const resultEl = document.getElementById("character");
+  resultEl.innerHTML = character[highest];
+  resultEl.classList.add("active");
 });
