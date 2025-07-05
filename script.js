@@ -64,26 +64,30 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 
   const highest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 
-  // Send to Google Sheets
-  fetch('https://script.google.com/macros/s/AKfycbx35EyR7DldqVu_cyXTabqGCBMS_6qr1PAzIdIcxQfRBrMr-qi2NPiFj20i6FZEb08o/exec', {
-    method: 'POST',
+  // Send to Formspree
+  fetch("https://formspree.io/f/xovwzvbk", {  // replace with your own endpoint
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      first_name: name,
+      name: name,
       email: email,
       character: highest
     })
   })
-    .then(response => response.text())
-    .then(() => {
-      alert('🎉 Submitted to Google Sheets!');
+    .then(response => {
+      if (response.ok) {
+        alert("🎉 Submission successful!");
+      } else {
+        alert("❌ Submission failed. Please try again.");
+      }
     })
     .catch(error => {
-      console.error('❌ Error:', error.message);
-      alert('❌ Submission failed');
+      console.error("Error:", error);
+      alert("❌ An error occurred.");
     });
+
 
   const character = {
     Rachel: `🛍️ You’re RACHEL GREEN!<br>Stylish, ambitious, and full of heart.<br>You care deeply about your people (even if you're a little dramatic sometimes).<br>You grow through every season — and look great while doing it.`,
