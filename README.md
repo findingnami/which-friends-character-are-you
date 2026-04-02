@@ -176,9 +176,9 @@ REACT_APP_EMAIL_API_KEY=your_api_key
 
 ---
 
-## 🤝 Credits
+## 🤝 Client & Credits
 
-Created by [@rachelsfriendsmedia](https://instagram.com/rachelsfriendsmedia)
+Created for [@rachelsfriendsmedia](https://instagram.com/rachelsfriendsmedia)
 
 *Friends* characters and references are the intellectual property of Warner Bros. Entertainment. This project is a fan-made, non-commercial quiz.
 
